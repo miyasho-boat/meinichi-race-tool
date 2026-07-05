@@ -2,15 +2,114 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>明日の厳選レースツール</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>宮商ボートレース・厳選レースツール</title>
+
+<style>
+body{
+margin:0;
+background:#111;
+color:#fff;
+font-family:sans-serif;
+padding:20px;
+}
+
+h1{
+text-align:center;
+color:#FFD700;
+}
+
+.box{
+background:#222;
+padding:15px;
+margin:15px 0;
+border-radius:10px;
+}
+
+select,input{
+width:100%;
+padding:12px;
+font-size:18px;
+margin-top:8px;
+}
+
+button{
+width:100%;
+padding:15px;
+font-size:20px;
+background:#FFD700;
+border:none;
+border-radius:10px;
+font-weight:bold;
+}
+
+</style>
+
 </head>
 
 <body>
 
-<h1>🏁 明日の厳選レースツール</h1>
+<h1>🏁宮商ボートレース<br>厳選レースツール</h1>
 
-<p>作成中です。</p>
+<div class="box">
+
+<label>📅 日付</label>
+<input type="date">
+
+</div>
+
+<div class="box">
+
+<label>🏟 レース場</label>
+
+<select>
+
+<option>桐生</option>
+<option>戸田</option>
+<option>江戸川</option>
+<option>平和島</option>
+<option>多摩川</option>
+
+</select>
+
+</div>
+
+<div class="box">
+
+<label>🏁 レース</label>
+
+<select>
+
+<option>1R</option>
+<option>2R</option>
+<option>3R</option>
+<option>4R</option>
+<option>5R</option>
+<option>6R</option>
+<option>7R</option>
+<option>8R</option>
+<option>9R</option>
+<option>10R</option>
+<option>11R</option>
+<option>12R</option>
+
+</select>
+
+</div>
+
+<div class="box">
+
+<label>📷 出走表画像</label>
+
+<input type="file">
+
+</div>
+
+<button>
+
+解析開始
+
+</button>
 
 </body>
 </html>
