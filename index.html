@@ -154,6 +154,18 @@ imageInput.addEventListener("change", function () {
   preview.src = URL.createObjectURL(file);
   preview.style.display = "block";
 });
+  const button = document.querySelector("button");
+
+button.addEventListener("click", async function () {
+
+  if (!imageInput.files[0]) {
+    alert("出走表画像を選択してください。");
+    return;
+  }
+
+  alert("OCR解析を開始します。");
+
+});
 </script>
   <script src="https://unpkg.com/tesseract.js@5/dist/tesseract.min.js"></script>
 </body>
