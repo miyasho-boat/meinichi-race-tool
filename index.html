@@ -163,7 +163,12 @@ button.addEventListener("click", async function () {
     return;
   }
 
-  alert("OCR解析を開始します。");
+  const result = await Tesseract.recognize(
+  imageInput.files[0],
+  "jpn"
+);
+
+alert(result.data.text);
 
 });
 </script>
