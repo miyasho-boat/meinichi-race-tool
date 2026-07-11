@@ -125,6 +125,7 @@ font-weight:bold;
 <br><br>
 
 <img id="preview" style="max-width:100%;display:none;border-radius:10px;">
+  <canvas id="canvas" style="display:none;"></canvas>
 
 </div>
 
@@ -143,6 +144,48 @@ font-weight:bold;
 
 </div>
 <script>
+  async function readNames(file){
+
+    const img = new Image();
+
+    img.src = URL.createObjectURL(file);
+
+    await new Promise(r=>img.onload=r);
+
+    const canvas=document.getElementById("canvas");
+    const ctx=canvas.getContext("2d");
+
+    canvas.width=img.width;
+    canvas.height=img.height;
+
+    ctx.drawImage(img,0,0);
+
+    // 名前欄だけ切り抜き
+    const sx=220;
+    const sy=120;
+    const sw=220;
+    const sh=760;
+
+    const nameCanvas=document.createElement("canvas");
+
+    nameCanvas.width=sw;
+    nameCanvas.height=sh;
+
+    const nctx=nameCanvas.getContext("2d");
+
+    nctx.drawImage(
+        canvas,
+        sx,sy,sw,sh,
+        0,0,sw,sh
+    );
+
+    const result=await Tesseract.recognize(
+        nameCanvas,
+        "jpn"
+    );
+
+    return result.data.text;
+}
 const dateInput = document.querySelector('input[type="date"]');
 
 const tomorrow = new Date();
@@ -175,14 +218,7 @@ button.addEventListener("click", async function () {
 
   resultArea.textContent = "解析中...";
 
-  const result = await Tesseract.recognize(
-    imageInput.files[0],
-    "jpn"
-  );
-
-  let text = result.data.text
-    .replace(/\n{2,}/g, "\n")
-    .trim();
+  const text = await readNames(imageInput.files[0]);
 
 
   const lines = text
