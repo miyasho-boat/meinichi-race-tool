@@ -185,38 +185,39 @@ button.addEventListener("click", async function () {
     .trim();
 
 
-  const lines = text.split("\n");
-
-  let output = "";
-  let boat = 1;
-
-
-  lines.forEach(line => {
-
-    line = line.trim();
-
-    if(line === "") return;
+  const lines = text
+  .split("\n")
+  .map(line => line.trim())
+  .filter(line => line !== "");
 
 
-    if(boat <= 6){
-
-      if(output === "" || output.endsWith("艇\n\n")){
-        output += "━━━━━━━━━━\n";
-        output += "🚤 " + boat + "号艇\n\n";
-        boat++;
-      }
-
-    }
-
-    output += line + "\n";
-
-  });
+let output = "";
+let boat = 0;
 
 
-  output += "━━━━━━━━━━";
+lines.forEach(line => {
+
+  // 1〜6の単独数字を艇番号として認識
+  if(/^[1-6]$/.test(line)){
+
+    boat = Number(line);
+
+    output += "\n━━━━━━━━━━\n";
+    output += "🚤 " + boat + "号艇\n\n";
+
+    return;
+  }
 
 
-  resultArea.textContent = output;
+  output += line + "\n";
+
+});
+
+
+output += "\n━━━━━━━━━━";
+
+
+resultArea.textContent = output;
 
 });
 </script>
