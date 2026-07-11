@@ -177,9 +177,11 @@ button.addEventListener("click", async function () {
   imageInput.files[0],
   "jpn"
 );
-
-resultArea.textContent = result.data.text;
-
+  
+const text = result.data.text
+  .replace(/\n{2,}/g, "\n")
+  .trim();
+resultArea.textContent = text;
 });
 </script>
   <script src="https://unpkg.com/tesseract.js@5/dist/tesseract.min.js"></script>
