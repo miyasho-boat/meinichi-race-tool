@@ -164,7 +164,7 @@ imageInput.addEventListener("change", function () {
   preview.style.display = "block";
 });
   const button = document.querySelector("button");
-  const resultArea = document.getElementById("result");
+const resultArea = document.getElementById("result");
 
 button.addEventListener("click", async function () {
 
@@ -173,15 +173,51 @@ button.addEventListener("click", async function () {
     return;
   }
 
+  resultArea.textContent = "解析中...";
+
   const result = await Tesseract.recognize(
-  imageInput.files[0],
-  "jpn"
-);
-  
-const text = result.data.text
-  .replace(/\n{2,}/g, "\n")
-  .trim();
-resultArea.textContent = text;
+    imageInput.files[0],
+    "jpn"
+  );
+
+  let text = result.data.text
+    .replace(/\n{2,}/g, "\n")
+    .trim();
+
+
+  const lines = text.split("\n");
+
+  let output = "";
+  let boat = 1;
+
+
+  lines.forEach(line => {
+
+    line = line.trim();
+
+    if(line === "") return;
+
+
+    if(boat <= 6){
+
+      if(output === "" || output.endsWith("艇\n\n")){
+        output += "━━━━━━━━━━\n";
+        output += "🚤 " + boat + "号艇\n\n";
+        boat++;
+      }
+
+    }
+
+    output += line + "\n";
+
+  });
+
+
+  output += "━━━━━━━━━━";
+
+
+  resultArea.textContent = output;
+
 });
 </script>
   <script src="https://unpkg.com/tesseract.js@5/dist/tesseract.min.js"></script>
