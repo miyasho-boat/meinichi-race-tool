@@ -164,6 +164,7 @@ imageInput.addEventListener("change", function () {
   preview.style.display = "block";
 });
   const button = document.querySelector("button");
+  const resultArea = document.getElementById("result");
 
 button.addEventListener("click", async function () {
 
@@ -177,7 +178,7 @@ button.addEventListener("click", async function () {
   "jpn"
 );
 
-alert(result.data.text);
+resultArea.textContent = result.data.text;
 
 });
 </script>
